@@ -1,0 +1,10 @@
+{
+  "name": "com.anshaer.web-vmc",
+  "version": "0.1.0",
+  "displayName": "Anshaer Web VMC",
+  "description": "Local OSC/VMC receiver for humanoid bones and mesh blend shapes. Uses the existing web bridge.",
+  "unity": "2022.3",
+  "author": { "name": "Anshaer", "url": "https://anshaer.com" },
+  "license": "MIT",
+  "keywords": ["vmc", "osc", "mocap", "vtuber"]
+}

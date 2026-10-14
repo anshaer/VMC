@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Unity 使用說明 | Anshaer_Web_VMC</title>
+    <link rel="stylesheet" href="../shared/site.css" />
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a href="../index.html">首頁</a><a href="../transmit/">傳輸</a><a href="../docs/">說明</a
+        ><a href="../downloads/">下載</a><a href="https://github.com/anshaer">GitHub</a>
+      </nav>
+      <h1>Unity 使用說明</h1>
+      <a class="button" href="README.md" download>下載 Markdown</a>
+      <section>
+        <h1>Unity 線上接收 — v1.1 上架版</h1>
+        <ul>
+          <li>
+            接收頁：<a href="https://anshaer.github.io/VMC/unity/receiver.html"
+              >https://anshaer.github.io/VMC/unity/receiver.html</a
+            >
+          </li>
+          <li>
+            共用手機：<a href="https://anshaer.github.io/VMC/transmit/mobile.html"
+              >https://anshaer.github.io/VMC/transmit/mobile.html</a
+            >
+          </li>
+          <li>
+            共用平板：<a href="https://anshaer.github.io/VMC/transmit/tablet.html"
+              >https://anshaer.github.io/VMC/transmit/tablet.html</a
+            >
+          </li>
+          <li>
+            本機連接插件（橋接程式）：<a
+              href="https://anshaer.github.io/VMC/downloads/Anshaer_Web_VMC_Bridge_v0.3.zip"
+              >https://anshaer.github.io/VMC/downloads/Anshaer_Web_VMC_Bridge_v0.3.zip</a
+            >
+          </li>
+        </ul>
+        <h2>預設使用流程</h2>
+        <ol>
+          <li>安裝 Unity 必要的模型接收元件／啟用 VMC 接收；步驟見下方原元件說明。</li>
+          <li>
+            下載本機連接插件 v0.3，解壓並執行
+            <code>Anshaer_Web_VMC_Bridge.exe</code>。這是本機伴隨程式，不是裝在 Unity 裡面的外掛。
+          </li>
+          <li>
+            它會開出本機授權選擇頁；點 <strong>Unity 線上接收頁</strong>，瀏覽器會開
+            GitHub，並帶入本次授權碼。
+          </li>
+          <li>
+            在 GitHub 接收頁按「連接本機插件」。若瀏覽器提示本機／區域網路存取，允許
+            <code>anshaer.github.io</code>；不用關閉整個瀏覽器的安全機制。
+          </li>
+          <li>
+            在 GitHub 頁設定 UDP 與轉送範圍，按「套用／開始轉送」。軟體端 UDP 埠須一致，預設
+            <code>39540</code>。
+          </li>
+          <li>手機／平板直接開 GitHub 傳輸頁，掃描／輸入線上接收頁的 12 碼。</li>
+        </ol>
+        <p>
+          不需要下載接收
+          HTML。一次只開一個接收頁；三種軟體共用單一橋接输出設定。插件重新啟動會換授權碼，請從新的本機授權頁再進線上接收頁。
+        </p>
+        <p>
+          本機 HTTP 只監聽 <code>127.0.0.1</code>，預設 <code>19091</code>。授權碼是 64
+          位十六進位碼，以 URL fragment 帶入後立即清除；不放進查詢字串或遠端伺服器。不開放其他網站
+          CORS。手機的 12 碼是另外的 WebRTC 配對碼。
+        </p>
+        <p>
+          以下為原插件／元件的安装、骨骼與表情設定細節；其中舊「本機接收 HTML」流程已由上方 GitHub
+          線上流程取代。元件算法與版本保持原樣。
+        </p>
+        <hr />
+        <h1>Anshaer Web VMC — Unity v0.1</h1>
+        <p>
+          Unity 用的本機 VMC 接收元件。手機／平板沿用通用 VMC 網頁，資料經既有 Go 橋接器以 UDP 送入
+          Unity。無需 Warudo、VSeeFace或系統Python。
+        </p>
+        <h2>版本與平台</h2>
+        <ul>
+          <li>
+            目標：<strong>Unity 2022.3 LTS 與 Unity 6</strong>。使用一般 Humanoid
+            Animator、Transform 與 SkinnedMeshRenderer API，沒有第三方Unity套件依賴。
+          </li>
+          <li>
+            模式：Unity Editor
+            <strong>Play Mode</strong>，與Windows／macOS／Linux桌面Standalone。現成橋接EXE是Windows
+            x64，其他系統需要另外編譯Go橋接器。
+          </li>
+          <li>
+            不支援Unity WebGL。瀏覽器無法直接使用本套UDP方式，之後需另做WebRTC／WebSocket資料接收。
+          </li>
+          <li>
+            <strong>尚未在真實 Unity Editor 執行。</strong> 已以Unity API測試替身完成Runtime／Editor
+            C#編譯與實際UDP測試，以及Go
+            HTTP→UDP串接。這不是對特定Unity小版本或你的角色視覺效果的實機認證。
+          </li>
+        </ul>
+        <h2>安裝（建議使用 unitypackage）</h2>
+        <ol>
+          <li>
+            從本專案下載 <code>Anshaer_Web_Vmc_Unity_v0.1.unitypackage</code>，不用下載網頁ZIP。
+          </li>
+          <li>在Unity Hub開啟你的Unity專案。</li>
+          <li>Unity上方選 <strong>Assets → Import Package → Custom Package…</strong>。</li>
+          <li>選下載的 <strong>Anshaer_Web_Vmc_Unity_v0.1.unitypackage</strong>。</li>
+          <li>匯入視窗保持全部勾選，按 <strong>Import</strong>，等待Unity編譯。</li>
+          <li>Project面板應出現 <strong>Assets/AnshaerWebVMC</strong>。</li>
+        </ol>
+        <p>
+          另一種安裝方式是UPM：使用本區的plugin原始套件，進
+          <strong>Window → Package Manager → ＋ → Install/Add package from disk…</strong>，選
+          <code>plugin/com.anshaer.web-vmc/package.json</code>。兩種方式擇一，避免同名類別重複。
+        </p>
+        <h2>放到角色與設定</h2>
+        <ol>
+          <li>把有骨架的角色Prefab放到場景。</li>
+          <li>Hierarchy點角色最外層物件。</li>
+          <li>
+            Inspector按 <strong>Add Component</strong>，搜尋 <strong>Anshaer</strong>，新增
+            <strong>Anshaer Web Vmc Receiver</strong>。
+          </li>
+          <li>
+            <strong>Target Animator</strong>：拖入角色的Humanoid Animator。<strong
+              >Model Root</strong
+            >：拖入角色的根物件，它應包含臉部SkinnedMeshRenderer與骨架。
+          </li>
+          <li>在元件底部按 <strong>自動建立 Humanoid／BlendShape 映射</strong>。</li>
+          <li>
+            展開 <strong>Bone Mappings</strong> 和
+            <strong>Blend Mappings</strong> 確認目標。Humanoid
+            Avatar須有效；沒有Avatar時骨骼可手動新增映射，臉部BlendShape仍可手動指定。
+          </li>
+          <li>UDP <strong>Port = 39540</strong>；預設接收骨骼／表情，Root位移關閉。</li>
+          <li>
+            按Unity上方 <strong>▶ Play</strong>。預設
+            <strong>Start On Play</strong> 勾選，會自動開始接收；也可用元件底部
+            <strong>開始接收／停止接收</strong> 按鈕。
+          </li>
+        </ol>
+        <p>元件不在Edit Mode接收，請先進入Play Mode。</p>
+        <h2>接手機／平板</h2>
+        <ol>
+          <li>
+            解壓本包 <code>../downloads/Anshaer_Web_VMC_Bridge_v0.3.zip</code>，雙擊裡面的
+            <code>Anshaer_Web_VMC_Bridge.exe</code>。
+          </li>
+          <li>程式開授權選擇頁；選 Unity，進入 GitHub 線上接收頁。</li>
+          <li>網頁UDP埠同樣設 <strong>39540</strong>。</li>
+          <li>
+            先按網頁 <strong>測試轉頭／閉眼／張嘴（3秒）</strong>，確認Unity元件狀態與角色反應。
+          </li>
+          <li>手機／平板開既有通用VMC頁，輸入或掃描本機接收頁的連接碼。</li>
+          <li>
+            需要頭部／面部：橋接頁選面部；需要手臂：手機辨識與橋接頁都選上半身；需要腿：兩端都選全身。
+          </li>
+        </ol>
+        <p>
+          不要讓其他程式同時占用39540的UDP接收埠。需要改埠時，先停止Unity接收，修改Port，再開始；橋接網頁也改成相同值。
+        </p>
+        <h2>功能</h2>
+        <ul>
+          <li>Humanoid標準骨骼、手掌、手指、眼／下顎與腿部映射。</li>
+          <li>
+            BlendShape source →
+            renderer／shapeName映射。<code>Blink_L</code>可對EyeBlinkLeft，<code>A</code>可對JawOpen，<code>U</code>可對MouthPucker。
+          </li>
+          <li>
+            source值0–1，<strong>Weight Scale預設100</strong>，對應常見Unity
+            BlendShape權重；特殊Mesh可自行改倍率。
+          </li>
+          <li>
+            每骨骼Signed Axis、旋轉反轉、Rotation
+            Offset（度數）。XYZ要選三個不同軸；不合法組合略過該映射。
+          </li>
+          <li>
+            <strong>Use Rest Axes</strong>：依開始時的骨骼軸向轉換Normalized
+            VMC旋轉。不同Rig可能要切換並調整各骨骼補正。
+          </li>
+          <li>
+            <strong>3秒後中立校正</strong
+            >：記錄當時新鮮VMC旋轉，對應開始時的姿態；不是自動辨認Tpose。清除校正移除參考訊號。
+          </li>
+          <li>
+            <strong>Receive Root</strong>預設關閉，開啟後以第一次收到的Root作為位置與旋轉參考。
+          </li>
+          <li>忽略各骨骼來源位置，避免拉長／縮短模型肢體。</li>
+          <li>更新15–60FPS、Smooth Seconds平滑。</li>
+          <li>
+            停止釋放UDP，不強制讓模型歸零；<strong>停止並還原開始姿態</strong>可恢復元件開始時的骨骼、Root及BlendShape值。Animator／constraints等其他系統仍可繼續改變姿態。
+          </li>
+        </ul>
+        <p>
+          Play
+          Mode內變更與中立校正通常在退出Play後被Unity還原；請依Unity專案的設定保存流程管理。映射與方向補正可在Edit
+          Mode設定並隨場景／Prefab保存。
+        </p>
+        <h2>VRM注意</h2>
+        <p>本元件不匯入VRM，需使用專案自己的UniVRM／VRM載入器。</p>
+        <p>
+          骨骼可由Humanoid Animator自動找。表情直接控制Mesh BlendShape，不直接調用VRM0
+          BlendShapeProxy或VRM1 Expression
+          API；VRM表情Clip、材質綁定與組合權重不會自動展開，請指定實際Mesh shapeName。
+        </p>
+        <p>
+          VRM1 Control Rig、UniVRM
+          Expression更新、Animator／IK／constraints等可能再覆寫Transform或BlendShape。元件以LateUpdate、ExecutionOrder
+          10000套用，但不保證在每個自訂系統後執行。需依你專案調整執行順序與目標Rig，不能只因VRM0／VRM1版本就全部轉180度。
+        </p>
+        <h2>資源與限制</h2>
+        <p>只監聽127.0.0.1，不直接收另一台手機的UDP；跨網路仍交給原網頁WebRTC方案。</p>
+        <p>
+          只保留目前骨骼／表情值，名稱數最多128、封包最多65507bytes／128messages／3層bundle。每個更新最多128datagrams或6ms接收時間。不儲存傳輸歷史，不累計幾張／幾次。訊號3秒過期後清除快取，停止寫入該訊號，保持最後姿態；其他動畫系統仍可以驅動模型。
+        </p>
+        <p>
+          沒有連續錄製AnimationClip／Timeline，沒有服裝或表情快捷鍵事件映射。滑動方向目前仍在橋接網頁顯示，不送到Unity元件。
+        </p>
+        <p>
+          獨立桌面程式沒有Editor的Inspector。可自行用UI
+          Button的OnClick綁元件：<code>StartListening()</code>、<code>StopReceiver()</code>、<code>CalibrateNeutral()</code>、<code>ClearCalibration()</code>、<code>RestoreStartPose()</code>。
+        </p>
+        <h2>授權</h2>
+        <p>
+          原創Unity程式採MIT，完整授權見LICENSE.txt。原橋接器的第三方授權在其ZIP內。底部版權文字不增加MIT之外的限制。
+        </p>
+        <p>Copyright © 2026-2030 anshaer.com. All rights reserved.</p>
+        <p>
+          更新前請先用舊接收頁關閉舊版本橋接程式，再啟動 v0.3；避免本機 HTTP 埠 19091 被舊程式占用。
+        </p>
+      </section>
+    </main>
+    <footer>Copyright © 2026-2030 anshaer.com. All rights reserved.</footer>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+{"name":"Anshaer.WebVMC.Editor","references":["Anshaer.WebVMC.Runtime"],"includePlatforms":["Editor"],"allowUnsafeCode":false,"autoReferenced":true}
