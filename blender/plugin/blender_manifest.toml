@@ -1,0 +1,13 @@
+schema_version = "1.0.0"
+id = "anshaer_web_vmc"
+version = "0.2.0"
+name = "Anshaer Web VMC"
+tagline = "Receive local VMC bones and expressions from the web bridge"
+maintainer = "Anshaer (anshaer.com)"
+type = "add-on"
+tags = ["Animation", "Rigging"]
+blender_version_min = "4.2.0"
+blender_version_max = "5.3.0"
+license = ["SPDX:GPL-3.0-or-later"]
+[permissions]
+network = "Receive OSC/VMC motion data from the local UDP web bridge"

@@ -1,0 +1,18 @@
+{
+  "project": "Anshaer_Web_VMC",
+  "release": "1.1",
+  "base_url": "https://anshaer.github.io/VMC/",
+  "default": "GitHub HTTPS transmit + receive",
+  "native_connector": "0.3",
+  "receivers": {
+    "web": "1.2",
+    "warudo": "0.2",
+    "blender": "0.2",
+    "unity": "0.1",
+    "vseeface": "0.1",
+    "vtube-studio": "0.1"
+  },
+  "bridge_exe_sha256": "832994877be6eda6da19e47f29267bf5a5a9bf330a2f66b2343ad2bde6f2a864",
+  "format": "Prettier, LF, 2 spaces, printWidth100",
+  "testing": "docs/TESTING.md"
+}

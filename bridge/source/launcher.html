@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>本機連接插件 v0.3</title>
+    <style>
+      body {
+        font: 16px system-ui;
+        background: #131821;
+        color: #e6edf7;
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 16px;
+      }
+      a {
+        display: inline-block;
+        color: #9bd8ff;
+        padding: 12px;
+        border: 1px solid #526680;
+        margin: 8px;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        background: #28364c;
+        color: #fff;
+        border: 1px solid #526680;
+      }
+      footer {
+        font-size: 11px;
+        margin-top: 40px;
+        color: #96a4b7;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Anshaer Web VMC 本機連接插件 v0.3</h1>
+    <p>
+      插件已啟動。點選軟體，在 GitHub 開啟接收頁；授權碼會透過網址片段帶入，不必下載接收
+      HTML。進入接收頁後按「連接本機插件」，並允許瀏覽器本機網路存取。
+    </p>
+    <div id="links"></div>
+    <label
+      >本次插件授權碼（重新啟動會更換）<input readonly id="key" value="__BRIDGE_KEY__"
+    /></label>
+    <p>
+      本機服務：__BRIDGE_HOST__。網頁与目標軟體須在同一台電腦；手机／平板使用接收頁產生的 12 碼。
+    </p>
+    <footer>Copyright © 2026-2030 anshaer.com. All rights reserved.</footer>
+    <script>
+      const key = document.getElementById("key").value;
+      const port = "__BRIDGE_HOST__".split(":").pop();
+      for (const [folder, label] of [
+        ["blender", "Blender"],
+        ["unity", "Unity"],
+        ["vseeface", "VSeeFace"],
+      ]) {
+        const a = document.createElement("a");
+        a.href =
+          "https://anshaer.github.io/VMC/" +
+          folder +
+          "/receiver.html#bridgeKey=" +
+          encodeURIComponent(key) +
+          "&bridgePort=" +
+          encodeURIComponent(port);
+        a.textContent = "開啟 " + label + " 線上接收頁";
+        a.rel = "noreferrer";
+        document.getElementById("links").append(a);
+      }
+    </script>
+  </body>
+</html>

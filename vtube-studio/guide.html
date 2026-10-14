@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VTube Studio 使用說明 | Anshaer_Web_VMC</title>
+    <link rel="stylesheet" href="../shared/site.css" />
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a href="../index.html">首頁</a><a href="../transmit/">傳輸</a><a href="../docs/">說明</a
+        ><a href="../downloads/">下載</a><a href="https://github.com/anshaer">GitHub</a>
+      </nav>
+      <h1>VTube Studio 使用說明</h1>
+      <a class="button" href="README.md" download>下載 Markdown</a>
+      <section>
+        <h1>VTube Studio 線上接收</h1>
+        <p>接收元件沿用 v0.1，GitHub 上架版 v1.1。</p>
+        <ul>
+          <li>
+            接收頁：<a href="https://anshaer.github.io/VMC/vtube-studio/receiver.html"
+              >https://anshaer.github.io/VMC/vtube-studio/receiver.html</a
+            >
+          </li>
+          <li>
+            手機鏡頭：<a href="https://anshaer.github.io/VMC/transmit/mobile.html"
+              >https://anshaer.github.io/VMC/transmit/mobile.html</a
+            >
+          </li>
+          <li>
+            平板滑桿：<a href="https://anshaer.github.io/VMC/transmit/tablet.html"
+              >https://anshaer.github.io/VMC/transmit/tablet.html</a
+            >
+          </li>
+        </ul>
+        <p>
+          <strong
+            >直接在執行 VTS 的電腦開 GitHub 接收頁，不下載 HTML，也不用下載額外本機插件。</strong
+          >
+        </p>
+        <h2>首次連線</h2>
+        <ol>
+          <li>
+            桌面 VTube Studio 載入 Live2D 模型，在 API 設定開啟 API，確認埠號，預設通常 8001。
+          </li>
+          <li>
+            在同台電腦 Chrome／Edge 開線上接收頁，填埠號，按「連接
+            VTS」。瀏覽器若提示本機網路存取，允許本站。
+          </li>
+          <li>
+            回到 VTS，在提示允許 <strong>Anshaer Web VMC VTube Studio</strong>，開發者
+            <strong>anshaer.com</strong>。
+          </li>
+          <li>
+            接收頁出現已授權和模型名稱後，按「加入標準面部對應」，再勾選
+            <strong>啟用參數注入</strong>。
+          </li>
+          <li>手機／平板使用同一接收碼。手機開辨識，或平板操作面部滑桿。</li>
+        </ol>
+        <p>
+          只顯示連線成功不會控制模型，必須啟用注入且有有效參數對應。注入預設關閉；匯入設定後也關閉。
+        </p>
+        <h2>參數與方向</h2>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>來源</th>
+                <th>VTS 對應</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>左右轉頭</td>
+                <td>FaceAngleX</td>
+              </tr>
+              <tr>
+                <td>抬頭／低頭</td>
+                <td>FaceAngleY</td>
+              </tr>
+              <tr>
+                <td>頭部傾斜</td>
+                <td>FaceAngleZ</td>
+              </tr>
+              <tr>
+                <td>左／右閉眼 0→1</td>
+                <td>EyeOpenLeft／Right 1→0</td>
+              </tr>
+              <tr>
+                <td>張嘴</td>
+                <td>MouthOpen</td>
+              </tr>
+              <tr>
+                <td>平均微笑</td>
+                <td>MouthSmile</td>
+              </tr>
+              <tr>
+                <td>眉毛上提</td>
+                <td>Brows（模型有提供時）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          預設只新增 VTS
+          實際存在的輸入參數，不覆蓋既有對應。每列可單獨勾選；方向錯時交換輸出起點／終點，動作太大縮小輸出範圍。來源輸入夾在範圍中轉換，再限制到
+          VTS 實際參數範圍。
+        </p>
+        <p>
+          若目前值有變但模型沒動，在 VTS 的模型設定確認輸入參數有連到 Live2D
+          輸出参数。這不是直接注入 <code>ParamAngleX</code> 等 Live2D 輸出ID。
+        </p>
+        <h2>身體與手指</h2>
+        <p>
+          可新增各骨骼局部 XYZ 角度、根部 XYZ 位移到現有 VTS 自訂／預設輸入的對應。Live2D
+          必須本來有對應的動畫綁定。不能直接把 VMC 3D
+          骨架套進2D模型，也沒有自動建自訂參數或通用手臂綁定。
+        </p>
+        <h2>原生面捕搭配</h2>
+        <p>
+          只選想由平板控制的參數，其他留給 VTS 原生手機
+          App。混合權重1是本頁，0.5是與原生追蹤混合。本頁使用set模式；同一輸入不能同時由其他API插件set接管。faceFound不強制覆蓋。
+        </p>
+        <p>
+          關閉注入／來源逾時後停止傳送，約1秒交還原追蹤或預設值；不強制補零。身體仍更新但面部逾時時，不會偽造面部零值。
+        </p>
+        <h2>滑動快捷鍵</h2>
+        <p>
+          在 VTS
+          建立服裝／表情／動畫快捷鍵，再按「更新模型參數／快捷鍵」，將上、下、左、右對應到實際模型快捷鍵。可先用測試按鈕。
+        </p>
+        <p>
+          一次一個請求、至少200ms間隔，不累積過期動作。成功收到VTS確認才回原來源的滑動ACK；未設定方向僅確認收到。換模型後重新選快捷鍵。
+        </p>
+        <h2>授權與重連</h2>
+        <p>
+          授權碼只存在此瀏覽器本機儲存，設定JSON不含授權碼。斷線3秒後重連並重用授權；手動中斷不重連。被拒絕／撤銷時不反覆彈窗，按「重新授權」才再申請。
+        </p>
+        <p>
+          來源最多8台，按區域分工，3秒無更新釋放。注入一次一個在途請求，不累积歷史張數／次數，預覽預設關閉。設定可匯出／匯入JSON；模型切換4秒檢查一次，也能手動更新。
+        </p>
+        <h2>排錯</h2>
+        <ul>
+          <li>無法連線：確認VTS API開啟、埠一致、同台電腦；本站本機網路權限已允許。</li>
+          <li>有連線沒動：加入面部對應、勾注入、列勾選與VTS模型輸入綁定。</li>
+          <li>眼睛相反：閉眼來源要映射EyeOpen 1→0。</li>
+          <li>參數占用：先停止其他插件對同參數的set控制；錯誤後重新勾選注入。</li>
+          <li>黑底預覽：純平板不傳相機關鍵點，不代表滑桿未接收。</li>
+        </ul>
+        <p>
+          不同瀏覽器的本機WS政策可能不同；主要以Chrome／Edge的HTTPS與本機存取權限流程使用，不要求停用瀏覽器安全功能。
+        </p>
+        <h2>驗證限制</h2>
+        <p>
+          通訊／映射已做程式級模擬測試。此版的瀏覽器本機連線測試見
+          docs/TESTING.md；VTS服務使用模擬API，尚未以真實VTS程式與你的Live2D模型驗證。GitHub尚未代為部署。
+        </p>
+        <p>
+          官方API：<a href="https://github.com/DenchiSoft/VTubeStudio"
+            >https://github.com/DenchiSoft/VTubeStudio</a
+          >
+        </p>
+        <p>Copyright © 2026-2030 anshaer.com. All rights reserved.</p>
+      </section>
+    </main>
+    <footer>Copyright © 2026-2030 anshaer.com. All rights reserved.</footer>
+  </body>
+</html>
