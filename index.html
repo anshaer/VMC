@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>首頁 | Anshaer_Web_VMC</title>
+    <link rel="stylesheet" href="shared/site.css" />
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a href="index.html">首頁</a><a href="transmit/">傳輸</a><a href="docs/">說明</a
+        ><a href="downloads/">下載</a><a href="https://github.com/anshaer">GitHub</a>
+      </nav>
+      <h1>Anshaer_Web_VMC</h1>
+      <p>手機動捕、平板多點控制；傳輸與接收都在線上開啟，六種接收版本。</p>
+      <p class="hint">GitHub 上架包 v1.1 · 網址 https://anshaer.github.io/VMC/</p>
+      <section>
+        <h2>直接開線上接收頁，再連手機／平板</h2>
+        <ol>
+          <li>選下方接收軟體，依說明開啟接收頁與必要插件。</li>
+          <li>
+            接收頁產生連接碼，<a href="transmit/mobile.html">手機鏡頭頁</a>或<a
+              href="transmit/tablet.html"
+              >平板控制頁</a
+            >輸入同一碼。
+          </li>
+          <li>啟用辨識與軟體接收。VTS 還須加入參數對應並啟用注入。</li>
+        </ol>
+        <a class="button" href="transmit/">傳輸：手機／平板</a>
+      </section>
+      <div class="grid">
+        <article class="card">
+          <h2>Web</h2>
+          <p>網頁資料診斷與 2D 網頁接入基礎</p>
+          <p class="hint">元件 v1.2</p>
+          <a class="button" href="web/">進入</a><a class="button" href="web/guide.html">使用說明</a>
+        </article>
+        <article class="card">
+          <h2>Warudo</h2>
+          <p>WebSocket 插件 → Warudo VMC</p>
+          <p class="hint">元件 v0.2</p>
+          <a class="button" href="warudo/">進入</a
+          ><a class="button" href="warudo/guide.html">使用說明</a>
+        </article>
+        <article class="card">
+          <h2>Blender</h2>
+          <p>本機橋接 → Blender 骨架／表情插件</p>
+          <p class="hint">元件 v0.2</p>
+          <a class="button" href="blender/">進入</a
+          ><a class="button" href="blender/guide.html">使用說明</a>
+        </article>
+        <article class="card">
+          <h2>Unity</h2>
+          <p>本機橋接 → Unity Humanoid／BlendShape</p>
+          <p class="hint">元件 v0.1</p>
+          <a class="button" href="unity/">進入</a
+          ><a class="button" href="unity/guide.html">使用說明</a>
+        </article>
+        <article class="card">
+          <h2>VSeeFace</h2>
+          <p>本機橋接 → VSeeFace VMC 接收</p>
+          <p class="hint">元件 v0.1</p>
+          <a class="button" href="vseeface/">進入</a
+          ><a class="button" href="vseeface/guide.html">使用說明</a>
+        </article>
+        <article class="card">
+          <h2>VTube Studio</h2>
+          <p>VTS API → 輸入參數與模型快捷鍵</p>
+          <p class="hint">元件 v0.1</p>
+          <a class="button" href="vtube-studio/">進入</a
+          ><a class="button" href="vtube-studio/guide.html">使用說明</a>
+        </article>
+      </div>
+      <section>
+        <h2>共用功能</h2>
+        <p>
+          掃描／輸入連接碼、一維碼、按鈕顯示 QR、最多 8
+          台分區接收、滑動方向、資料逾時釋放與目前狀態顯示。各軟體能套用的動作與快捷鍵不同，請看專屬說明。
+        </p>
+        <p>
+          Web 區為接收診斷；不含角色渲染或 2D 製作器。VTS 控制 Live2D 輸入參數，不等同完整 3D
+          骨架動捕。
+        </p>
+      </section>
+    </main>
+    <footer>Copyright © 2026-2030 anshaer.com. All rights reserved.</footer>
+  </body>
+</html>
